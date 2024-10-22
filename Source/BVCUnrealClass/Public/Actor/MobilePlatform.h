@@ -30,6 +30,7 @@ protected:
 private:
 	void TickMovement(float DeltaTime);
 	void CheckIfAtEnd();
+	void DisplayMessage();
 
 	UPROPERTY(VisibleAnywhere, Category = "Movement")
 	bool bMovingForward = true;

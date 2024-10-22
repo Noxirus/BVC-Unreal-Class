@@ -13,7 +13,7 @@ AMobilePlatform::AMobilePlatform()
 void AMobilePlatform::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 	if (PlatformMesh)
 	{
 		StartingLocation = PlatformMesh->GetRelativeLocation();
@@ -55,3 +55,11 @@ void AMobilePlatform::CheckIfAtEnd()
 	}
 }
 
+void AMobilePlatform::DisplayMessage()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Hello from your console"));
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Red, TEXT("Hello from your screen"));
+	}
+}
