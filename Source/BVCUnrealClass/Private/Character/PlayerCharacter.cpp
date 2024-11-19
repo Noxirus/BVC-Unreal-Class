@@ -52,7 +52,7 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &APlayerCharacter::Jump);
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &APlayerCharacter::JumpStart);
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Movement);
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Look);
 	}
@@ -77,4 +77,16 @@ void APlayerCharacter::Look(const FInputActionValue& Value)
 
 	AddControllerYawInput(LookVector.X);
 	AddControllerPitchInput(-LookVector.Y);
+}
+
+void APlayerCharacter::JumpStart()
+{
+	if (GetCharacterMovement()->IsFalling()) return;
+
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+
+	if (AnimInstance && JumpMontage)
+	{
+		AnimInstance->Montage_Play(JumpMontage);
+	}
 }

@@ -10,6 +10,7 @@ class UCameraComponent;
 class USpringArmComponent;
 class UInputMappingContext;
 class UInputAction;
+class UAnimMontage;
 struct FInputActionValue;
 
 UCLASS()
@@ -26,6 +27,7 @@ protected:
 
 	void Movement(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
+	void JumpStart();
 
 	/*
 	**	Input
@@ -48,4 +50,10 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 	USpringArmComponent* CameraBoom;
+
+	UPROPERTY(EditAnywhere, Category = "Animation")
+	TObjectPtr<UAnimMontage> JumpMontage;
+
+public:
+	FORCEINLINE	UCameraComponent* GetGamera() { return Camera; }
 };

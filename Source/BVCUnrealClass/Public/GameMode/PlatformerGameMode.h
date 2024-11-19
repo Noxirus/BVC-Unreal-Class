@@ -14,4 +14,9 @@ class BVCUNREALCLASS_API APlatformerGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 	
+public:
+	void ChangeScore(int ChangeAmount);
+
+private:
+	int CurrentScore = 0;
 };
