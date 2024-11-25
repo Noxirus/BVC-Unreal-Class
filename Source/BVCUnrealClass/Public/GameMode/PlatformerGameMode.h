@@ -6,9 +6,8 @@
 #include "GameFramework/GameModeBase.h"
 #include "PlatformerGameMode.generated.h"
 
-/**
- * 
- */
+class UGameOverlay;
+
 UCLASS()
 class BVCUNREALCLASS_API APlatformerGameMode : public AGameModeBase
 {
@@ -17,6 +16,14 @@ class BVCUNREALCLASS_API APlatformerGameMode : public AGameModeBase
 public:
 	void ChangeScore(int ChangeAmount);
 
+protected:
+	virtual void BeginPlay() override;
+
 private:
 	int CurrentScore = 0;
+
+	UPROPERTY(EditAnywhere, Category = "UserInterface")
+	TSubclassOf<UGameOverlay> GameOverlayRef;
+
+	TObjectPtr<UGameOverlay> GameOverlay;
 };
