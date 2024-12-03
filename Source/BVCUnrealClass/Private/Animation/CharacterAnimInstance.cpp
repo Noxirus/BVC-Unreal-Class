@@ -2,19 +2,19 @@
 
 
 #include "Animation/CharacterAnimInstance.h"
-#include "Character/PlayerCharacter.h"
+#include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 
 void UCharacterAnimInstance::NativeInitializeAnimation()
 {
-	APawn* PlayerCharacterPawn = TryGetPawnOwner();
-	if (PlayerCharacterPawn)
+	APawn* CharacterPawn = TryGetPawnOwner();
+	if (CharacterPawn)
 	{
-		PlayerCharacter = Cast<APlayerCharacter>(PlayerCharacterPawn);
-		if (PlayerCharacter)
+		Character = Cast<ACharacter>(CharacterPawn);
+		if (Character)
 		{
-			MovementComponent = Cast<UCharacterMovementComponent>(PlayerCharacter->GetMovementComponent());		
+			MovementComponent = Cast<UCharacterMovementComponent>(Character->GetMovementComponent());		
 		}
 	}
 }
@@ -31,9 +31,9 @@ void UCharacterAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 
 FORCEINLINE void UCharacterAnimInstance::UpdateYawRotation()
 {
-	if (PlayerCharacter)
+	if (Character)
 	{
-		const FVector CurrentFacingDirection = PlayerCharacter->GetActorForwardVector();
+		const FVector CurrentFacingDirection = Character->GetActorForwardVector();
 		FVector CurrentVelocityDirection = MovementComponent->Velocity;
 		CurrentVelocityDirection.Normalize();
 

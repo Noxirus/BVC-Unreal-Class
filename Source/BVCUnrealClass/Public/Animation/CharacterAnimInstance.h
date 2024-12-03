@@ -6,7 +6,7 @@
 #include "Animation/AnimInstance.h"
 #include "CharacterAnimInstance.generated.h"
 
-class APlayerCharacter;
+class ACharacter;
 class UCharacterMovementComponent;
 
 UCLASS()
@@ -20,7 +20,7 @@ public:
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
 
 	UPROPERTY(BlueprintReadOnly)
-	TObjectPtr<APlayerCharacter> PlayerCharacter;
+	TObjectPtr<ACharacter> Character;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Movement")
 	TObjectPtr<UCharacterMovementComponent> MovementComponent;
